@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>UNTUK SENIOR AKUUU</title>
+
+<style>
+body{
+margin:0;
+font-family:'Segoe UI',sans-serif;
+text-align:center;
+color:white;
+overflow:hidden;
+background:linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a6c1ee);
+background-size:400% 400%;
+animation:gradient 12s ease infinite;
+}
+
+@keyframes gradient{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+.page{display:none;padding:50px;}
+.active{display:block;}
+
+button{
+padding:12px 25px;
+font-size:16px;
+border:none;
+border-radius:30px;
+margin:10px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{transform:scale(1.1);}
+
+.yes{background:white;color:#ff4e8a;}
+.no{background:#ff4e8a;color:white;position:relative;}
+
+img{
+width:250px;
+border-radius:20px;
+margin-top:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* LONG TEXT DIPERKECIL */
+.longtext{
+max-width:750px;
+margin:auto;
+font-size:15px;
+line-height:1.5;
+opacity:0;
+transition:opacity 2s;
+text-align:left;
+max-height:80vh;
+overflow:auto;
+padding-right:10px;
+}
+
+.heart{
+position:fixed;
+top:-10px;
+font-size:20px;
+animation:fall linear infinite;
+}
+
+@keyframes fall{
+to{transform:translateY(110vh);}
+}
+
+.cake{
+font-size:100px;
+animation:bounce 1.5s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-20px);}
+}
+
+.decor{
+font-size:40px;
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+<source src="lagu.mp3" type="audio/mpeg">
+</audio>
+
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+<h1>Happy Birthday Feby Rachma, My Beloved Cie</h1>
+<p id="countdown"></p>
+<button class="yes" onclick="nextPage(2)">Mulai 🎉</button>
+</div>
+
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+<div class="decor">🎈 🎊 🎉 🎈 🎊 🎉</div>
+<h2>Hari ini hari spesial kamu gasii kak? wkwk</h2>
+<div class="cake">🎂</div>
+<p>Make a wish dulu sebelum lanjut yaa</p>
+<button class="yes" onclick="nextPage(3)">udah make a wish aku nih</button>
+</div>
+
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+<h2>Tau Gasi Kak, Kamu Itu Spesial Banget Buat Aku. Kamu Udah Kaya Nasi Goreng SPESIAL Pondok Bunda Buat Aku HHEHE</h2>
+<img src="foto.png">
+<br>
+<button class="yes" onclick="nextPage(4)">Lanjut</button>
+</div>
+
+<!-- PAGE 4 -->
+<div class="page" id="page4">
+<h2>Aku Mw NanyA Donk Boz</h2>
+<p>Kamu sayang sama aku ga?</p>
+<button class="yes" onclick="nextPage(5)">Sayang banggEttttTT</button>
+<button class="no" id="noBtn">Kagak</button>
+</div>
+
+<!-- PAGE 5 -->
+<div class="page" id="page5">
+<h2>YEAYYY HAHAHAHA ILOVEUUU</h2>
+<p>Aku juga sayang banget sama kamu!</p>
+<button class="yes" onclick="nextPage(6)">Lanjut </button>
+</div>
+
+<!-- PAGE 6 -->
+<div class="page" id="page6">
+<h2>For U Cintaa</h2>
+<div class="longtext">
+<p id="typing"></p>
+</div>
+<br>
+<button class="yes" onclick="finalQuestion()">Klik terakhir ❤️</button>
+</div>
+
+<script>
+
+/* PAGE SWITCH + PLAY MUSIC */
+function nextPage(num){
+document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+document.getElementById("page"+num).classList.add("active");
+
+if(num == 2){
+document.getElementById("bgm").play();
+}
+
+if(num == 6){
+document.getElementById("typing").innerHTML = "";
+i = 0;
+document.querySelector(".longtext").style.opacity = "1";
+typeWriter();
+createConfetti();
+}
+}
+
+/* JAM REALTIME WIB */
+setInterval(function(){
+var now = new Date();
+var options = {
+timeZone: "Asia/Jakarta",
+hour: "2-digit",
+minute: "2-digit",
+second: "2-digit"
+};
+var timeWIB = now.toLocaleTimeString("id-ID", options);
+
+document.getElementById("countdown").innerHTML =
+"Sekarang Jam bEraPa YaAa?: " + timeWIB + " WIB ❤️";
+},1000);
+
+/* BUTTON KABUR */
+var noBtn = document.getElementById("noBtn");
+noBtn.addEventListener("mouseover",function(){
+var x = Math.random() * (window.innerWidth - 100);
+var y = Math.random() * (window.innerHeight - 50);
+noBtn.style.position = "fixed";
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+});
+
+/* HEART */
+function createHeart(){
+var heart = document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*3+2)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},5000);
+}
+setInterval(createHeart,300);
+
+/* CONFETTI */
+function createConfetti(){
+for(let i=0;i<100;i++){
+let conf=document.createElement("div");
+conf.innerHTML="🎉";
+conf.style.position="fixed";
+conf.style.left=Math.random()*100+"vw";
+conf.style.top="-10px";
+conf.style.fontSize="20px";
+conf.style.animation="fall 3s linear";
+document.body.appendChild(conf);
+setTimeout(()=>conf.remove(),3000);
+}
+}
+
+/* TYPEWRITER */
+var text = `Finally, the big 1-7! Selamat datang di usia yang kata orang paling indah. I’m so incredibly happy that I get to be the one standing by your side as you enter this new chapter. Lihat kamu tumbuh jadi perempuan yang makin dewasa, makin cantik, dan makin hebat itu bener-bener salah satu hal favorit aku di dunia ini.
+
+You’re officially a 'sweet seventeen' girl now, but to me, you’ve always been the sweetest person I’ve ever known. Makasih ya, Feb, udah lahir ke dunia ini dan makasih udah izinin aku jadi bagian dari hidup kamu. Di umur 17 ini, aku berharap semua mimpi-mimpi kamu dari yang paling kecil sampe yang paling ambisius bisa tercapai satu per satu. You deserve all the happiness in the world, and I’ll do my best to make sure you feel loved every single day.
+
+I know things might get more serious from now on, tapi jangan pernah takut buat melangkah ya. No matter what happens, you have me. Aku bakal selalu ada buat dengerin cerita kamu, buat nemenin kamu cari makan pas lagi laper, atau sekadar jadi sandaran pas kamu lagi capek. We’re going to make so many more amazing memories together, especially now that you’re seventeen!
+
+Stay humble, stay kind, and stay as wonderful as you are. Jangan pernah ragu sama kemampuan kamu sendiri, because you are capable of doing great things. I’m your number one fan, always.
+
+Sekali lagi, Happy Birthday, babe! Enjoy your special day to the fullest. Besok kita rayain lagi bareng Valentine, ya? Double celebration for my favorite girl!
+
+I love you more than words can describe. Happy Sweet Seventeen, my love! :3`;
+
+var i = 0;
+function typeWriter(){
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typeWriter,25);
+}
+}
+
+/* FINAL */
+function finalQuestion(){
+setTimeout(function(){
+alert("Stay with me forever YaaaAaAa ❤️");
+},500);
+}
+
+</script>
+
+</body>
+</html>
